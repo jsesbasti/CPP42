@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 02:14:57 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/07/03 02:28:17 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:10:34 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ private:
 	std::string number;
 
 public:
+	//setters
+	void	set_name(std::string _name)
+	{
+		name = _name;
+	}
+	void	set_surename(std::string _surename)
+	{
+		surename = _surename;
+	}
 	Contact(void);
 	~Contact(void);
 	

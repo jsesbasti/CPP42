@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 17:37:29 by jsebasti          #+#    #+#              #
-#    Updated: 2023/07/07 08:43:35 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/07/11 13:51:54 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CC = clang++
 CFLAGS = -Werror -Wextra -Wall -std=c++98
 # =============
 
-FILES = main functions
+FILES = main Contact Phonebook
 
 SRC = $(addsuffix .cpp, $(FILES))
 

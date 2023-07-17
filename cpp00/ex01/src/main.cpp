@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 02:25:37 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/07/16 08:35:23 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/17 06:18:04 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(void)
 			end = false;
 		else if (inp.compare("ADD") == 0)
 		{
-			std::cout << num_contact << std::endl;
 			pb.add_i( &pb, num_contact);
 			num_contact++;
 		}

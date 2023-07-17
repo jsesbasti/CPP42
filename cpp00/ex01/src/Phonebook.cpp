@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:15:54 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/07/17 06:30:54 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/17 06:48:13 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,18 @@ std::string  add_info( std::string msg )
 	std::cout << msg;
 	while (42)
 	{
-		std::getline(std::cin, dest);
-		dest.erase(0, dest.find_first_not_of(" \t\v\f\r"));
-		while (isspace(dest[dest.length() - 1]))
-			dest.erase(dest.find_last_not_of(" \t\v\r\f") + 1, dest[dest.length() - 1]);
-		if (dest.empty())
+		if (!std::getline(std::cin, dest))
 			std::cout << "Empty field not valid! Please, try again." << std::endl << msg;
 		else
-			break ;
+		{
+			dest.erase(0, dest.find_first_not_of(" \t\v\f\r"));
+			while (dest[dest.length() - 1] && isspace(dest[dest.length() - 1]))
+				dest.erase(dest.find_last_not_of(" \t\v\r\f") + 1, dest[dest.length() - 1]);
+			if (dest.empty())
+				std::cout << "Empty field not valid! Please, try again." << std::endl << msg;
+			else
+				break ;
+		}
 	}
 	return (dest);
 }
@@ -43,7 +47,6 @@ bool	check_num(std::string str)
 	{
 		if (str[i] < '0'|| str[i] > '9')
 		{
-			std::cout << str[i];
 			return (false);
 		}
 	}
@@ -57,16 +60,20 @@ std::string  add_num( std::string msg )
 	std::cout << msg;
 	while (42)
 	{
-		std::getline(std::cin, dest);
-		dest.erase(0, dest.find_first_not_of(" \t\v\f\r"));
-		while (isspace(dest[dest.length() - 1]))
-			dest.erase(dest.find_last_not_of(" \t\v\r\f") + 1, dest[dest.length() - 1]);
-		if (dest.empty())
+		if (!std::getline(std::cin, dest))
 			std::cout << "Empty field not valid! Please, try again." << std::endl << msg;
-		else if (check_num(dest) == false)
-			std::cout << " Is not a valid number! Please, try again." << std::endl << msg;
 		else
-			break ;
+		{
+			dest.erase(0, dest.find_first_not_of(" \t\v\f\r"));
+			while (isspace(dest[dest.length() - 1]))
+				dest.erase(dest.find_last_not_of(" \t\v\r\f") + 1, dest[dest.length() - 1]);
+			if (dest.empty())
+				std::cout << "Empty field not valid! Please, try again." << std::endl << msg;
+			else if (check_num(dest) == false)
+				std::cout << "Not number! Not valid! Please, try again." << std::endl << msg;
+			else
+				break ;
+		}
 	}
 	return (dest);
 }
@@ -93,7 +100,7 @@ void	PhoneBook::display()
 		check = true;
 		std::cout << "Please enter an index from 1 to 8: ";
 		if (!std::getline(std::cin, inp) || inp.empty() || check_num(inp) == false)
-			std::cout << " Is not valid! Please give a valid index" << std::endl;
+			std::cout << "Please give a valid index" << std::endl;
 		else
 			i = std::stoi(inp) - 1;
 		if (i >= 0 && i < 8)
@@ -113,7 +120,7 @@ void	PhoneBook::display()
 					std::cout << "Please give a valid input" << std::endl;
 			}
 		}
-		else
+		else if (i != -1)
 			std::cout << "Please give a valid index" << std::endl;
 	}
 }

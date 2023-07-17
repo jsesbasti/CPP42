@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 17:37:29 by jsebasti          #+#    #+#              #
-#    Updated: 2023/07/17 06:20:16 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/07/17 06:38:05 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ INC_DIR = inc/
 RM = rm -rf
 MP = mkdir -p
 CC = clang++
-CFLAGS = -Werror -Wextra -Wall -std=c++98 -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -std=c++98
 # =============
 
 FILES = main Contact Phonebook

@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 13:43:37 by jsebasti          #+#    #+#              #
-#    Updated: 2023/07/16 13:44:52 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/07/17 03:19:08 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ $(NAME):: $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(NAME)::
-	@echo "Hello, PhoneBook already compiled 😇"
+	@echo "Hello, Account already compiled 😇"
 
 -include $(DEP)
 

@@ -6,11 +6,11 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 07:41:15 by jsebasti          #+#    #+#              #
-#    Updated: 2023/07/28 05:38:56 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/07/28 05:38:44 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= MoarBrainZ
+NAME		= HiThisIsBrain
 MKFL		= Makefile
 NPD			= --no-print-directory
 OBJ_DIR		= obj/
@@ -27,7 +27,7 @@ CC = clang++
 CFLAGS = -Werror -Wextra -Wall -std=c++98
 # =============
 
-FILES = main Zombie zombieHorde
+FILES = main
 
 SRC = $(addsuffix .cpp, $(FILES))
 

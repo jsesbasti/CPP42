@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 20:22:11 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/06 10:32:46 by jsebasti         ###   ########.fr       */
+/*   Created: 2023/07/26 19:59:54 by jsebasti          #+#    #+#             */
+/*   Updated: 2023/09/07 19:20:05 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __FIXED_HPP__
-# define __FIXED_HPP__
+#include "Point.hpp"
 
-# include <iostream>
-
-class Fixed
-{
-private:
-	int					num;
-	static const int	floating = 8;
-public:
-	Fixed( void );
-	Fixed( const Fixed &fix );
-	Fixed& operator =( const Fixed &fix );
-	~Fixed();
-	int		getRawBits( void ) const ;
-	void	setRawBits( int const raw );
-};
-
-#endif
+int main(void) {
+	Point const a(0, 0);
+	Point const b(6, 0);
+	Point const c(3, 6);
+	Point const point(3, 1);
+	
+	if (bsp(a, b, c, point) == true)
+		std::cout << "El punto pertenece al triangulo" << std::endl;
+	else
+		std::cout << "El punto no pertenece al triangulo" << std::endl;
+	return 0;
+}

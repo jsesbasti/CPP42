@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 20:22:11 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/06 10:32:46 by jsebasti         ###   ########.fr       */
+/*   Created: 2023/09/07 14:01:42 by jsebasti          #+#    #+#             */
+/*   Updated: 2023/09/07 19:09:35 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __FIXED_HPP__
-# define __FIXED_HPP__
+#ifndef __POINT_HPP__
+# define __POINT_HPP__
 
-# include <iostream>
+# include "Fixed.hpp"
 
-class Fixed
-{
+class Point {
 private:
-	int					num;
-	static const int	floating = 8;
+	Fixed const	x;
+	Fixed const	y;
+
 public:
-	Fixed( void );
-	Fixed( const Fixed &fix );
-	Fixed& operator =( const Fixed &fix );
-	~Fixed();
-	int		getRawBits( void ) const ;
-	void	setRawBits( int const raw );
+	Point( void );
+	Point( const Point &copy );
+	Point( const float p1, const float p2);
+	Point& operator=( const Point &asg );
+	~Point();
+
+	//getters
+	Fixed getX( void ) const;
+	Fixed getY( void ) const;
 };
+
+bool	bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif

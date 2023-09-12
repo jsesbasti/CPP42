@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 23:56:34 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/12 03:55:45 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/09/12 07:36:53 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "ScavTrap.hpp"
 # include "ClapTrap.hpp"
 
-class DiamondTrap : public FragTrap, public ScavTrap {
+class DiamondTrap : public ScavTrap, public FragTrap {
 private:
 	std::string name;
 	unsigned int	hit_points;
@@ -32,8 +32,6 @@ public:
 	~DiamondTrap();
 
 	using	ScavTrap::attack;
-	using	FragTrap::beRepaired;
-	using	FragTrap::takeDamage;
 	void	whoAmI( void );	
 };
 

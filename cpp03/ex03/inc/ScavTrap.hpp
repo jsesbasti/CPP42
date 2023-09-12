@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 22:08:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/12 03:43:02 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/09/12 07:36:18 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : virtual public ClapTrap {
 public:
 	ScavTrap( void );
 	ScavTrap( std::string _name );

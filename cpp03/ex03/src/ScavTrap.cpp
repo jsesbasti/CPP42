@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 22:08:03 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/12 03:41:50 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/09/12 07:34:22 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ ScavTrap::ScavTrap ( const ScavTrap &src ) {
 	*this = src;
 }
 
-ScavTrap& ScavTrap::operator=( const ScavTrap &src ) {
+ScavTrap&	ScavTrap::operator=( const ScavTrap &src ) {
 	if (this != &src) {
 		this->name = src.name;
 		this->attack_damage = src.attack_damage;
@@ -46,12 +46,14 @@ ScavTrap::~ScavTrap() {
 	std::cout << "ScavTrap " << this->name << " destroyed" << std::endl;
 }
 
-void ScavTrap::guardGate() {
+void	ScavTrap::guardGate() {
 	std::cout << "ScavTrap " << this->name << " is now in Gate Keeper mode" << std::endl;
 }
 
-void    ScavTrap::attack( const std::string& target ) {
-    std::cout << "ScavTrap " << this->name << " attack " << target;
-    std::cout << ", causing " << this->attack_damage << " points of damage!" << std::endl;
-    this->energy_points--;
+void	ScavTrap::attack( const std::string& target ) {
+	if (this->energy_points > 0) {
+		std::cout << "ScavTrap " << this->name << " attack " << target;
+		std::cout << ", causing " << this->attack_damage << " points of damage!" << std::endl;
+		this->energy_points--;
+	}
 }

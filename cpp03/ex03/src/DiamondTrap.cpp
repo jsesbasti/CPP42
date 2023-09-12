@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 00:19:57 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/12 03:52:41 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/09/12 07:29:50 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ DiamondTrap::~DiamondTrap() {
 	std::cout << "DiamondTrap " << this->name << " destroyed." << std::endl;
 }
 
-DiamondTrap::DiamondTrap( const DiamondTrap &src ) {
+DiamondTrap::DiamondTrap( const DiamondTrap &src ) : ClapTrap(src), ScavTrap(src), FragTrap(src) {
 	*this = src;
 }
 

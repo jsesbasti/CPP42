@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 22:08:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/07 22:47:05 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/09/12 01:30:52 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 
 class FragTrap : public ClapTrap {
 public:
+	FragTrap( void );
 	FragTrap( std::string _name );
+	FragTrap( const FragTrap &src );
+	FragTrap& operator=( const FragTrap &src );
 	~FragTrap();
 	void	highFivesGuys( void );
 };

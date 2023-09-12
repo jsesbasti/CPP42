@@ -6,11 +6,15 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 22:08:03 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/07 22:50:44 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/09/12 01:32:24 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
+
+FragTrap::FragTrap ( void ) : ClapTrap(), attack_damage(30), energy_points(100), hit_points(100), name("Bob") {
+	std::cout << "Default constructor called, calling all default constructors" << std::endl;
+}
 
 FragTrap::FragTrap( std::string _name ) : ClapTrap(_name) {
 	this->name = _name;
@@ -20,8 +24,22 @@ FragTrap::FragTrap( std::string _name ) : ClapTrap(_name) {
 	this->energy_points = 100;
 }
 
+FragTrap::FragTrap ( const FragTrap &src ) {
+	*this = src;
+}
+
 FragTrap::~FragTrap() {
 	std::cout << "FragTrap " << this->name << " destroyed" << std::endl;
+}
+
+FragTrap& FragTrap::operator=( const FragTrap &src ) {
+	if (this != src) {
+		this->name = src.name;
+		this->attack_damage = src.attack_damage;
+		this->energy_points = src.energy_points;
+		this->hit_points = src.hit_points;
+	}
+	return (*this);
 }
 
 void FragTrap::highFivesGuys() {

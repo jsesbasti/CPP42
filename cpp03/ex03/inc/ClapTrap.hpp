@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 20:22:11 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/07 22:45:28 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/09/12 01:10:08 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ protected:
 	unsigned int	energy_points;
 	unsigned int	attack_damage;
 public:
+	ClapTrap( void );
 	ClapTrap( std::string _name );
+	ClapTrap( const ClapTrap &src );
+	ClapTrap& operator=( const ClapTrap &src );
 	~ClapTrap();
 	void	attack( const std::string& target);
 	void	takeDamage( unsigned int amount );

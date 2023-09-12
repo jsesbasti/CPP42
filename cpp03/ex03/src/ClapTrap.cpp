@@ -6,22 +6,45 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 20:54:18 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/07 22:40:10 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/09/12 01:32:22 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap( std::string _name ) : name(_name) {
-    this->hit_points = 10;
-    this->energy_points = 10;
-    this->attack_damage = 0;
+// Constructors -------------------------
+
+ClapTrap::ClapTrap ( void ) : name("Bob"), hit_points(10), energy_points(10), attack_damage(0) {
+    std::cout << "Default constructor called, setting name of ClapTrap to Bob" << std::endl;
+}
+
+ClapTrap::ClapTrap ( const ClapTrap &src ) {
+    *this = src;
+}
+
+ClapTrap::ClapTrap( std::string _name ) : name(_name) hit_points(10), energy_points(10), attack_damage(0) {
     std::cout << "ClapTrap " << _name << " created" << std::endl;
 }
+
+// Destructors --------------------- 
 
 ClapTrap::~ClapTrap( void ) {
     std::cout << "ClapTrap " << this->name << " destroyed" << std::endl;
 }
+
+//  Overloads ------------------
+
+ClapTrap& ClapTrap::operator=( const ClapTrap &src ) {
+    if (this != src) {
+        this->name = src.name;
+        this->hit_points = src.hit_points;
+        this->energy_points = src.energy_points;
+        this->attack_damage = src.attack_damage;
+    }
+    return *this;
+}
+
+// Functions ------------------
 
 void    ClapTrap::attack( const std::string& target ) {
     std::cout << "ClapTrap " << this->name << " attack " << target;

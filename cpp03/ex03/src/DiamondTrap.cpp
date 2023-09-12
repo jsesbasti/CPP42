@@ -6,14 +6,18 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 00:19:57 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/12 01:32:23 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/09/12 03:52:41 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap( void ) : ClapTrap(), ScavTrap(), FragTrap(), name("Bob") {
-	 std::cout << "Default constructor called, calling all default constructors" << std::endl;
+	std::cout << "Default constructor called, calling all default constructors" << std::endl;
+	this->hit_points = FragTrap::hit_points;
+	this->energy_points = ScavTrap::energy_points;
+	this->attack_damage = FragTrap::attack_damage;
+	this->ClapTrap::name = ClapTrap::name + "_clap_name";
 }
 
 DiamondTrap::DiamondTrap( std::string _name ) : ClapTrap(_name), ScavTrap(_name), FragTrap(_name) {
@@ -42,6 +46,7 @@ DiamondTrap& DiamondTrap::operator= ( const DiamondTrap &src ) {
 		this->hit_points = src.hit_points;
 		this->attack_damage = src.attack_damage;
 		this->energy_points = src.energy_points;
+		this->ClapTrap::name = ClapTrap::name + "_clap_name";
 	}
 	return *this;
 }

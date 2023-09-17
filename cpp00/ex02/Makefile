@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 13:43:37 by jsebasti          #+#    #+#              #
-#    Updated: 2023/07/17 03:19:08 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/09/17 06:42:36 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CC = clang++
 CFLAGS = -Werror -Wextra -Wall -std=c++98
 # =============
 
-FILES = tests Account
+FILES = tests $(NAME)
 
 SRC = $(addsuffix .cpp, $(FILES))
 

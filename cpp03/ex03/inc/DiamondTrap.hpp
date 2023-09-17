@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 23:56:34 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/12 07:36:53 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:23:41 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ public:
 	DiamondTrap& operator=( const DiamondTrap &src );
 	~DiamondTrap();
 
-	using	ScavTrap::attack;
 	void	whoAmI( void );	
 };
 

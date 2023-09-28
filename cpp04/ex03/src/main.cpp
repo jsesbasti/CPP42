@@ -5,18 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 05:44:22 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/20 21:03:10 by jsebasti         ###   ########.fr       */
+/*   Created: 2023/09/28 07:49:24 by jsebasti          #+#    #+#             */
+/*   Updated: 2023/09/28 12:34:57 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include	<iostream>
-#include	<iomanip>
-#include	"AMateria.hpp"
-#include	"MateriaSource.hpp"
-#include	"Character.hpp"
-#include	"Ice.hpp"
-#include	"Cure.hpp"
 
 #include	<iostream>
 #include	<iomanip>
@@ -100,9 +92,11 @@ int main( void )
 
 	print_title( "3. Creating Character \"vilma\" and \"oktorok\"", C_GREEN, C_YELLOW );
 	Character* vilma = new Character("vilma");
+	vilma->printMaterias();
 	std::cout << std::endl;
 
 	Character* oktorok = new Character("oktorok");
+	oktorok->printMaterias();
 	std::cout << std::endl;
 
 // ------------------------------------------------------------------------------------ //
@@ -123,6 +117,7 @@ int main( void )
 	vilma->equip(tmp);
 
 	std::cout << std::endl;
+	vilma->printMaterias();
 
 	std::cout << std::endl;
 	tmp = src->createMateria("ice");
@@ -134,25 +129,31 @@ int main( void )
 	print_title( "5. Testing Character Assignation overload \"vilma = oktorok\" for deep copy and changed vilma afterwards", C_GREEN, C_YELLOW );
 	*oktorok = *vilma;
 
-	vilma->unequip(0);
+	vilma->unequip(2);
 	std::cout << "VILMA" << std::endl;
+	vilma->printMaterias();
 	std::cout << std::endl;
 
 	std::cout << "OKTOROK" << std::endl;
+	oktorok->printMaterias();
 	std::cout << std::endl;
 
 // ------------------------------------------------------------------------------------ //
 
 	print_title( "6. Testing character copy constructor for deep copy \"stardust = Character(vilma)\" and changed vilma afterwards", C_GREEN, C_YELLOW );
 
+	vilma->printMaterias();
 	Character* stardust = new Character(*vilma);
+    stardust->printMaterias();
 
 	tmp = src->createMateria("ice");
 	vilma->equip(tmp);
 	std::cout << "VILMA" << std::endl;
+	vilma->printMaterias();
 	std::cout << std::endl;
 
 	std::cout << "STARDUST" << std::endl;
+    stardust->printMaterias();
 
 
 	std::cout << std::endl;
@@ -171,7 +172,7 @@ int main( void )
 // ------------------------------------------------------------------------------------ //
 
 	print_title( "8. \"vilma\" trying to use unequiped materias on \"oktorok\" ", C_GREEN, C_YELLOW );
-	// vilma->unequip(0);
+	vilma->unequip(0);
 	vilma->use(0, *oktorok);
 
 	std::cout << std::endl;
@@ -187,13 +188,17 @@ int main( void )
 	lucifer->equip(ice);
 	lucifer->equip(cure);
 	lucifer->equip(ice);
+	std::cout << cure << std::endl;
 	lucifer->unequip(0);
 	lucifer->unequip(1);
 	lucifer->unequip(2);
 	lucifer->unequip(3);
+	std::cout << cure << std::endl;
 	lucifer->equip(cure);
 	lucifer->equip(ice);
 
+	lucifer->printMaterias();
+	lucifer->printFloor();
 
 	std::cout << std::endl;
 
@@ -222,14 +227,20 @@ int main( void )
 	std::cout << std::endl;
 
 	print_title( "11 -> STARDUST", C_RED, C_YELLOW );
+	stardust->printMaterias();
+	stardust->printFloor();
 	delete stardust;
 	std::cout << std::endl;
 
 	print_title( "11 -> OKTOROK", C_RED, C_YELLOW );
+	oktorok->printMaterias();
+	oktorok->printFloor();
 	delete oktorok;
 	std::cout << std::endl;
 
 	print_title( "11 -> VILMA", C_RED, C_YELLOW );
+	vilma->printMaterias();
+	vilma->printFloor();
 	delete vilma;
 	std::cout << std::endl;
 

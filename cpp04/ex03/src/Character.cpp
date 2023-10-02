@@ -6,13 +6,16 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:56:36 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/10/02 12:27:46 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:04:21 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
-Character::Character( void ) : name("Bob"), currentIdx(0) {
+
+// Constructors -----------------------
+
+Character::Character( void ) : name("Bob"), inventoryIndex(0) {
 
 	std::cout << "Default Character constructor called. Naming your Character Bob" << std::endl;
 	for (int i = 0; i < MAX_INVENTORY; i++)
@@ -21,7 +24,7 @@ Character::Character( void ) : name("Bob"), currentIdx(0) {
 	this->flooridx = 0;
 }
 
-Character::Character( std::string _name ) : name(_name), currentIdx(0) {
+Character::Character( std::string _name ) : name(_name), inventoryIndex(0) {
 
 	std::cout << "Character " << this->name << " created." << std::endl;
 	for (int i = 0; i < MAX_INVENTORY; i++)
@@ -34,21 +37,44 @@ Character::Character( std::string _name ) : name(_name), currentIdx(0) {
 Character::Character( const Character& src ) {
 
 	std::cout << "Copy Character constructor called" << std::endl;
-	for (int i = 0; i < MAX_INVENTORY; i++) {
-		if (src.inventory[ i ] != NULL)
-			this->inventory[ i ] = src.inventory[ i ]->clone();
-		else
-			this->inventory[ i ] = NULL;
-	}
-	if (src.floor)
-		this->floor = copyFloor(src.floor, src.flooridx);
-	this->currentIdx = src.currentIdx;
+	copyInventory( src );
+	this->floor = copyFloor(src.floor, src.flooridx);
+	this->inventoryIndex = src.inventoryIndex;
 	this->flooridx = src.flooridx;
 }
+
+
+// Destructor ---------------------------
 
 Character::~Character( void ) {
 
 	std::cout << "Killing " << this->name << std::endl;
+	deleteInventory();
+	deleteFloor();
+}
+
+
+// Overloads ----------------------------
+
+Character&	Character::operator=( const Character& src) {
+
+	if (this != &src) {
+		deleteInventory();
+		copyInventory( src );
+		deleteFloor();
+		this->floor = copyFloor(src.floor, src.flooridx);
+		this->inventoryIndex = src.inventoryIndex;
+		this->flooridx = src.flooridx;
+	}
+	return (*this);
+
+}
+
+
+// Delete Inventory & Floor ---------------------
+
+void	Character::deleteInventory( void )
+{
 	for ( int i = 0; i < MAX_INVENTORY; i++ ) {
 		if (this->inventory[i] != NULL)
 		{
@@ -56,45 +82,41 @@ Character::~Character( void ) {
 			this->inventory[i] = NULL;
 		}
 	}
-	if ( this->floor != NULL ) {
-		for ( int i = 0; i < this->flooridx; i++ )
-			if (this->floor[i] != NULL)
-				delete this->floor[i];
+	return ;
+}
+
+void	Character::deleteFloor( void )
+{
+	if (this->floor)
+	{
+		for (int i = 0; i < this->flooridx; i++)
+			delete this->floor[i];
 		delete [] this->floor;
 		this->floor = NULL;
 	}
+	return ;
 }
 
-Character&	Character::operator=( const Character& src) {
 
-	if (this != &src) {
-		for (int i = 0; i < MAX_INVENTORY; i++) {
-			if (this->inventory[ i ] != NULL)
-				delete this->inventory[ i ];
+// Copy Inventory & Floor ------------------
+
+void		Character::copyInventory( const Character& src )
+{
+	for (int i = 0; i < MAX_INVENTORY; i++) {
+		if (src.inventory[ i ] != NULL)
+			this->inventory[ i ] = src.inventory[ i ]->clone();
+		else
 			this->inventory[ i ] = NULL;
-			if (src.inventory[ i ] != NULL)
-				this->inventory[ i ] = src.inventory[ i ]->clone();
-		}
-		if (this->floor)
-		{
-			for (int i = 0; i < this->flooridx; i++)
-				delete this->floor[i];
-			delete [] this->floor;
-			this->floor = NULL;
-		}
-		if (src.floor)
-			this->floor = copyFloor(src.floor, src.flooridx);
-		this->currentIdx = src.currentIdx;
-		this->flooridx = src.flooridx;
 	}
-	return (*this);
-
+	return ;
 }
 
 AMateria	**copyFloor( AMateria **srcFloor, int newFloorLen )
 {
 	AMateria	**newFloor;
 
+	if (!srcFloor)
+		return (NULL);
 	newFloor = new AMateria*[newFloorLen];
 	for (int i = 0; i < newFloorLen; i++)
 	{
@@ -106,15 +128,21 @@ AMateria	**copyFloor( AMateria **srcFloor, int newFloorLen )
 	return (newFloor);
 }
 
+
+// Getters ------------------
+
 std::string const&	Character::getName( void ) const {
 
 	return (this->name);
 
 }
 
+
+// Functiions -------------------
+
 void	Character::use( int idx, ICharacter &target ) {
 
-	if (idx < 0 || idx >= 4 || this->inventory[ idx ] == NULL)
+	if (idx < 0 || idx >= MAX_INVENTORY || this->inventory[ idx ] == NULL)
 	{
 		std::cout << "Please, don't try to use unequiped or inexistent materias 😇" << std::endl;
 		return ;
@@ -123,44 +151,29 @@ void	Character::use( int idx, ICharacter &target ) {
 
 }
 
-void	Character::equip( AMateria *m ) {
+void	Character::equip( AMateria *m )
+{
+	static bool	enoughtSpace = true;
 
 	if (m == NULL)
 	{
 		std::cout << "Can not equip an inexistent materia" << std::endl;
 		return ;
 	}
-	for ( int i = 0; i < MAX_INVENTORY; i++ )
-	{
-		if ( this->inventory[ i ] == m )
-		{
-			std::cout << "This materia has been equiped before" << std::endl;
-			return ;
-		}
-	}
-	if (existMateriaInFloor( *m ))
-	{
-		std::cout << "This materia has been thrown before" << std::endl;
+	if (existMateriaInInventory( *m ))
 		return ;
-	}
-	if (this->currentIdx == -1)
+	if (existMateriaInFloor( *m ))	
+		return ;
+	if (!enoughtSpace)
 	{
-		std::cout << "No space left in the inventory, threwing the materia to the floor";
+		std::cout << "No space left in the inventory, threwing the materia to the floor" << std::endl;
 		addFloor( *m );
 		return ;
 	}
-	for (; this->currentIdx < MAX_INVENTORY; this->currentIdx++ )
-	{
-		if ( this->inventory[ this->currentIdx ] == NULL )
-		{
-			this->inventory[ this->currentIdx ] = m;
-			break ;
-		}
-	}
-	std::cout << "Character: " << this->name << " equip called with inventory = " << m->getType() << std::endl;
-	if ( this->currentIdx == MAX_INVENTORY - 1 && this->inventory[ this->currentIdx ] != NULL )
-		this->currentIdx = -1;
-
+	addInventory( *m );
+	std::cout << "Character: " << this->name << " equip called with materia = " << m->getType() << std::endl;
+	if ( this->inventoryIndex == MAX_INVENTORY - 1 && this->inventory[ this->inventoryIndex ] != NULL )
+		enoughtSpace = false;
 }
 
 void	Character::unequip( int idx ) {
@@ -170,21 +183,33 @@ void	Character::unequip( int idx ) {
 		std::cout << "Can not unequip an unequiped or inexistent materia" << std::endl;
 		return ;
 	}
-	if (existMateriaInFloor( *this->inventory[ idx ] ))
-	{
-		this->inventory[ idx ] = NULL;
-		return ;
-	}
-	std::cout << std::endl << "Character: " << this->name << " just threwn " << this->inventory[ idx ]->getType() << " to the floor " << std::endl << std::endl;
+	std::cout << std::endl << "Character: " << this->name << " just threwn " \
+		<< this->inventory[ idx ]->getType() << " to the floor " << std::endl << std::endl;
 	addFloor( *this->inventory[ idx ] );
 	this->inventory[ idx ] = NULL;
 }
+
+
+// Add Materia to Floor & Inventory -----------------------
 
 void	Character::addFloor( AMateria &m ) {
 	
 	this->floor = incrementFloorMem( this->floor, this->flooridx );
 	this->floor[this->flooridx] = &m;
 	this->flooridx++;
+}
+
+void	Character::addInventory( AMateria& m) {
+	while ( this->inventoryIndex < MAX_INVENTORY )
+	{
+		if ( this->inventory[ this->inventoryIndex ] == NULL )
+		{
+			this->inventory[ this->inventoryIndex ] = &m;
+			break ;
+		}
+		this->inventoryIndex++;
+	}
+	return ;
 }
 
 AMateria **incrementFloorMem( AMateria **floor, int floorLen )
@@ -201,16 +226,38 @@ AMateria **incrementFloorMem( AMateria **floor, int floorLen )
 
 }
 
+
+// Checkers of duplicateds -----------------------
+
+bool	Character::existMateriaInInventory( AMateria& m )
+{
+	for ( int i = 0; i < MAX_INVENTORY; i++ )
+	{
+		if ( this->inventory[ i ] == &m )
+		{
+			std::cout << "This materia has been equiped before" << std::endl;
+			return (true);
+		}
+	}
+	return (false);
+}
+
 bool	Character::existMateriaInFloor( AMateria& m )
 {
 	if (this->floor != NULL)
 	{
 		for ( int i = 0; i < this->flooridx; i++ )
 			if ( this->floor[ i ] == &m )
+			{
+				std::cout << "This materia has been thrown before" << std::endl;
 				return (true);
+			}
 	}
 	return (false);
 }
+
+
+// Print Inventory & Floor ---------------------------
 
 void	Character::printFloor( void ) const {
 	if (!this->floor)

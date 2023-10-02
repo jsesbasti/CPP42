@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 20:54:18 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/15 10:22:58 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:40:23 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ ClapTrap& ClapTrap::operator=( const ClapTrap &src ) {
 	return *this;
 }
 
+std::ostream&	operator<<( std::ostream& out, ClapTrap& clap ) {
+	out << "Name: " << clap.getName() << " Hit points: " << clap.getHitPoints() \
+		<< " Energy Points: " << clap.getEnergyPoints() << " Attack Damage: " << clap.getAttackDamage();
+	return ( out );
+}
+
 // Functions ------------------
 
 void    ClapTrap::attack( const std::string& target ) {
@@ -59,6 +65,7 @@ void    ClapTrap::attack( const std::string& target ) {
 		std::cout << ", causing " << this->attack_damage << " points of damage!" << std::endl;
 		this->energy_points--;
 	}
+	return ;
 }
 
 void    ClapTrap::takeDamage( unsigned int amount ) {
@@ -74,4 +81,22 @@ void    ClapTrap::beRepaired( unsigned int amount ) {
 		std::cout << "ClapTrap " << this->name << " rapired itself " << amount << " hit points. ";
 		std::cout << this->hit_points << " left." << std::endl;
 	}
+	return ;
+}
+
+// Getters ------------------
+std::string	ClapTrap::getName( void ) const {
+	return (this->name);
+}
+
+int	ClapTrap::getHitPoints( void ) const {
+	return (this->hit_points);
+}
+
+int	ClapTrap::getEnergyPoints( void ) const {
+	return (this->energy_points);
+}
+
+int	ClapTrap::getAttackDamage( void ) const {
+	return (this->attack_damage);
 }

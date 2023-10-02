@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 07:41:15 by jsebasti          #+#    #+#              #
-#    Updated: 2023/07/28 05:38:44 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/10/02 12:56:24 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,15 +38,17 @@ OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 DEP = $(addsuffix .d, $(basename $(OBJ)))
 # =============
 
-$(OBJ_DIR)%.o: %.cpp $(MKFL)
+$(OBJ_DIR)%.o: %.cpp
 	@$(MP) $(dir $@)
-	$(CC) $(CFLAGS) -MMD -I $(INC_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -MMD -I $(INC_DIR) -c $< -o $@
+	@echo "Object of the file $(basename $<) has been created 🤐"
 
 all:
 	@$(MAKE) $(NAME) $(NPD)
 
 $(NAME):: $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@echo "Compiling $(NAME) 😈"
 
 $(NAME)::
 	@echo "Hello, $(NAME) already compiled 😇"

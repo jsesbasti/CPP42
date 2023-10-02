@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 07:49:24 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/28 12:34:57 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/02 12:24:30 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ int main( void )
 	tmp = src->createMateria("ice");
 	oktorok->equip(tmp);
 	std::cout << std::endl;
+	std::cout << std::endl;
+
 
 // ------------------------------------------------------------------------------------ //
 
@@ -158,6 +160,7 @@ int main( void )
 
 	std::cout << std::endl;
 
+
 // ------------------------------------------------------------------------------------ //
 
 	print_title( "7. \"vilma\" using all equiped materias on \"oktorok\" ", C_GREEN, C_YELLOW );
@@ -188,12 +191,10 @@ int main( void )
 	lucifer->equip(ice);
 	lucifer->equip(cure);
 	lucifer->equip(ice);
-	std::cout << cure << std::endl;
 	lucifer->unequip(0);
 	lucifer->unequip(1);
 	lucifer->unequip(2);
 	lucifer->unequip(3);
-	std::cout << cure << std::endl;
 	lucifer->equip(cure);
 	lucifer->equip(ice);
 
@@ -212,6 +213,9 @@ int main( void )
 	test->equip(tmp);
    	test->unequip(0);
 
+   	// test->printFloor();
+   	std::cout << std::endl;
+   	// test->printMaterias();
 	std::cout << std::endl;
 
 // ------------------------------------------------------------------------------------ //

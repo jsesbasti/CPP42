@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:44:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/28 12:26:36 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:14:42 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "ICharacter.hpp"
 # include <iostream>
+
+# define MAX_INVENTORY 4
 
 class Character : public ICharacter {
 private:
@@ -40,6 +42,10 @@ public:
 	void					addFloor( AMateria &m );
 	void					printFloor( void ) const;
 	void					printMaterias( void ) const;
+	bool					existMateriaInFloor( AMateria& m );
 };
+
+AMateria				**incrementFloorMem( AMateria **floor, int floorLen );
+AMateria				**copyFloor( AMateria **srcFloor, int newFloorLen );
 
 #endif

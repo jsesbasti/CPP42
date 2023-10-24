@@ -6,13 +6,13 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 22:08:03 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/12 03:45:13 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:52:01 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap ( void ) : ClapTrap(), name("Bob") {
+FragTrap::FragTrap ( void ) : ClapTrap("Bob") {
 	std::cout << "Default constructor called, calling all default constructors" << std::endl;
 	this->attack_damage = 30;
 	this->energy_points = 100;

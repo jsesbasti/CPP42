@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 07:41:15 by jsebasti          #+#    #+#              #
-#    Updated: 2023/10/02 14:43:36 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/10/24 16:07:12 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ INC_DIR = inc/
 RM = rm -rf
 MP = mkdir -p
 CC = clang++
-CFLAGS = -Werror -Wextra -Wall -std=c++98
+CFLAGS = -Werror -Wextra -Wall -std=c++98 #-fsanitize=address
 # =============
 
 FILES = main ClapTrap

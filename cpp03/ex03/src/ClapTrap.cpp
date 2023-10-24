@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 20:54:18 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/10/02 14:40:23 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:11:09 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ std::ostream&	operator<<( std::ostream& out, ClapTrap& clap ) {
 // Functions ------------------
 
 void    ClapTrap::attack( const std::string& target ) {
+	if (this->hit_points <= 0)
+	{
+		std::cout << "ClapTrap " << this->name << " is dead." << std::endl;
+		return ;
+	}
 	if (this->energy_points > 0) {
 		std::cout << "ClapTrap " << this->name << " attack " << target;
 		std::cout << ", causing " << this->attack_damage << " points of damage!" << std::endl;
@@ -69,12 +74,22 @@ void    ClapTrap::attack( const std::string& target ) {
 }
 
 void    ClapTrap::takeDamage( unsigned int amount ) {
+	if (this->hit_points <= 0)
+	{
+		std::cout << "ClapTrap " << this->name << " is dead." << std::endl;
+		return ;
+	}
 	this->hit_points -= amount;
 	std::cout << "ClapTrap " << this->name << " take " << amount;
 	std::cout << " points of damage. " << this->hit_points << " hit points left." << std::endl;
 }
 
 void    ClapTrap::beRepaired( unsigned int amount ) {
+	if (this->hit_points <= 0)
+	{
+		std::cout << "ClapTrap " << this->name << " is dead." << std::endl;
+		return ;
+	}
 	if (this->energy_points > 0) {
 		this->hit_points += amount;
 		this->energy_points--;
@@ -99,4 +114,29 @@ int	ClapTrap::getEnergyPoints( void ) const {
 
 int	ClapTrap::getAttackDamage( void ) const {
 	return (this->attack_damage);
+}
+
+// Setters -----------------
+void	ClapTrap::setName( std::string _name )
+{
+	this->name = _name;
+	return ;
+}
+
+void	ClapTrap::setHitPoints( int _hit_points )
+{
+	this->hit_points = _hit_points;
+	return ;
+}
+
+void	ClapTrap::setEnergyPoints( int _energy_points )
+{
+	this->energy_points = _energy_points;
+	return ;
+}
+
+void	ClapTrap::setAttackDamage( unsigned int _attack_damage )
+{
+	this->attack_damage = _attack_damage;
+	return ;
 }

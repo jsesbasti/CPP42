@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 07:46:59 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/14 11:15:20 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:19:02 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 Dog::Dog( void ) : Animal::Animal("Dog") {
 	std::cout << "A WoffWoff has entered in the chat" << std::endl;
-	this->type = Animal::getType();
 	this->brain = new Brain;
 }
 
@@ -26,13 +25,14 @@ Dog::Dog( const Dog &src ) : Animal(src) {
 }
 
 Dog::~Dog( void ) {
-	delete brain;
+	delete this->brain;
 	std::cout << "Our besti leave us" << std::endl;
 }
 
 Dog& Dog::operator=( const Dog &src ) {
 	if (this != &src) {
-		this->type = src.type;
+		delete this->brain;
+		this->Animal::type = src.type;
 		if (src.brain != NULL)
 			this->brain = new Brain(*(src.brain));
 		else

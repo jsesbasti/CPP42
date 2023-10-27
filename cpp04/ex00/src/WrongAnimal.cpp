@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 16:13:30 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/14 16:16:49 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/27 10:34:01 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ WrongAnimal::~WrongAnimal( void ) {
 
 WrongAnimal& WrongAnimal::operator=( const WrongAnimal &src ) {
 	if (this != &src) {
-		this->type = src.type;
+		*this = src;
 	}
 	return *this;
 }

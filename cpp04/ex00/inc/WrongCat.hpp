@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 16:08:24 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/14 16:13:12 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/27 10:29:54 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "WrongAnimal.hpp"
 
 class WrongCat : public WrongAnimal {
-private:
-	std::string type;
 public:
 	WrongCat( void );
 	WrongCat( const WrongCat &src );

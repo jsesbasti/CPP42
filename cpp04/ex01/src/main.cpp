@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 07:46:59 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/14 08:01:28 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:13:38 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,6 +308,6 @@ int	main( void )
 	print_title( "Test: Animal V.1", C_BLUE, C_YELLOW );
 	test_Animal_v1();
 	print_title( "Test: Animal V.2", C_BLUE, C_YELLOW );
-	test_Animal_v2( 5 );
+	test_Animal_v2( 10 );
 	return ( 0 );
 }

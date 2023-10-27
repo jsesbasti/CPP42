@@ -6,14 +6,13 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 07:46:59 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/14 12:45:10 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:19:32 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
 Cat::Cat( void ) : Animal::Animal("Cat") {
-	this->type = Animal::getType();
 	this->brain = new Brain;
 	std::cout << "A Meaw arrived from the street" << std::endl;
 }
@@ -33,7 +32,7 @@ Cat::~Cat( void ) {
 Cat& Cat::operator=( const Cat &src ) {
 	if (this != &src) {
 		delete this->brain;
-		this->type = src.type;
+		this->Animal::type = src.type;
 		if (src.brain != NULL)
 			this->brain = new Brain(*(src.brain));
 		else

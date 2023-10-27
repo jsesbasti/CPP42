@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 07:34:48 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/14 08:41:01 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/27 10:24:03 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ Brain& Brain::operator=( const Brain &src ) {
 
 
 std::string Brain::b_getIdea( unsigned int _idx ) const {
-	if (_idx >= MAX_IDEAS) {
+	if (_idx >= MAX_IDEAS)
 		return ("Error the index is bigger than your brain capacity");
-	}
 	return ( this->ideas[ _idx ] );
 }
 

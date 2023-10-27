@@ -6,14 +6,13 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 16:11:04 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/14 16:21:34 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:19:41 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongCat.hpp"
 
 WrongCat::WrongCat( void ) : WrongAnimal::WrongAnimal("WrongCat") {
-	this->type = WrongAnimal::getType();
 	std::cout << "A Cow arrived from the space" << std::endl;
 }
 

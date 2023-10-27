@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 07:46:23 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/14 07:59:25 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:12:35 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 class Dog : public Animal {
 private:
-	std::string type;
 	Brain*		brain;
+
 public:
 	Dog( void );
 	Dog( const Dog &src );
@@ -31,6 +31,7 @@ public:
 	void			addIdea( std::string idea );
 	std::string		getIdea( unsigned int idx ) const;
 	unsigned int	getIndex( void ) const;
-	std::string		getCurrentIdea( void ) const;};
+	std::string		getCurrentIdea( void ) const;
+};
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 07:46:23 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/09/14 11:06:30 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:16:05 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 class Dog : public Animal {
 private:
-	std::string type;
 	Brain*		brain;
 
 public:

@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 07:49:24 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/10/02 12:24:30 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/11/07 03:57:32 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,9 +213,9 @@ int main( void )
 	test->equip(tmp);
    	test->unequip(0);
 
-   	// test->printFloor();
+   	test->printFloor();
    	std::cout << std::endl;
-   	// test->printMaterias();
+   	test->printMaterias();
 	std::cout << std::endl;
 
 // ------------------------------------------------------------------------------------ //

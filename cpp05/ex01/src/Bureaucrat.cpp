@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:40:52 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/11/12 02:28:40 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/11/12 21:27:07 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,24 @@ Bureaucrat &Bureaucrat::operator=( const Bureaucrat &src )
 		this->grade = src.getGrade();
 	}
 	return (*this);
+}
+
+void	Bureaucrat::signForm( Form &form )
+{
+	bool	tmp_signed = form.getSign();
+
+	try
+	{
+		form.beSigned(*this);
+		if (tmp_signed == false)
+			std::cout << this->getName() << " signed " << form.getName() << std::endl;
+		else
+			std::cout << this->getName() << " couldn't sign " << form.getName() << " beacause it was signed" << std::endl;
+	}
+	catch ( std::out_of_range &error)
+	{
+		std::cout << this->getName() << " couldn't sign " << form.getName() << " beacause " << error.what() << std::endl;
+	}
 }
 
 std::ostream&	operator<<( std::ostream& out, const Bureaucrat& bureaucrat )

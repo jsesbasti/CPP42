@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:36:43 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/11/12 21:19:24 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:19:20 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ void	testsBureaucratSignForm( void )
 	
 	//	Invalid Grade to signForm
 
-	doBureaucratSignFormTest( 1, "too low signGrade", JuanMinGrade, formMidGrade );
+	doBureaucratSignFormTest( 1, "too low signGrade", JuanMidGrade, formMidGrade );
 
 	// Limits Grade to signForm and equal grade
 	doBureaucratSignFormTest( 4, "signGrade equals to Bureaucrat Grade [ MIN GRADE ]", \

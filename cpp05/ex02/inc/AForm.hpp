@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 23:57:44 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/11/14 10:27:57 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:37:35 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,26 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 private:
 	std::string		name;
 	bool			isSigned;
 	unsigned int	gradeToSign;
 	unsigned int	gradeToExecute;
-	Form( void );
+	AForm( void );
 	void			checkGradeToSign( void ) const;
 	void			checkGradeToExecute( void ) const;
+	virtual void	executeForm( void ) const = 0;
 
 public:
-	Form( std::string _name, unsigned int _gradeToSign, unsigned int _gradeToExecute );
-	Form( const Form &form );
-	~Form( void );
+	AForm( std::string _name, unsigned int _gradeToSign, unsigned int _gradeToExecute );
+	AForm( const AForm &form );
+	virtual ~AForm( void );
 	
 	//	Overload
 
-	Form	&operator=( const Form &form );
+	AForm	&operator=( const AForm &form );
 
 	//	Execptions
 
@@ -50,18 +51,25 @@ public:
 			GradeTooHighExeption( std::string error );
 	};
 
+	class NotSignedExeption : public std::logic_error {
+		public:
+			NotSignedExeption( std::string error );
+	};
+
 	//	Getters
 
-	std::string		getName( void ) const;
-	bool			getSign( void ) const;
-	unsigned int	getGradeToSign( void ) const;
-	unsigned int	getGradeToExecute( void ) const;
+	std::string			getName( void ) const;
+	bool				getSign( void ) const;
+	unsigned int		getGradeToSign( void ) const;
+	unsigned int		getGradeToExecute( void ) const;
 
 	//	Functions
+	virtual	std::string	getTarget( void ) const = 0;
+	void				beSigned( const Bureaucrat &bureaucrat);
+	void				execute( const Bureaucrat & executor) const;
 
-	void			beSigned( const Bureaucrat &bureaucrat);
 };
 
-std::ostream&	operator<<( std::ostream& out, const Form& form );
+std::ostream&	operator<<( std::ostream& out, const AForm& form );
 
 #endif

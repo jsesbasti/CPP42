@@ -6,7 +6,7 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 07:41:15 by jsebasti          #+#    #+#              #
-#    Updated: 2023/11/11 17:41:52 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/11/12 23:43:41 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ INC_DIR = inc/
 RM = rm -rf
 MP = mkdir -p
 CC = clang++
-CFLAGS = -Werror -Wextra -Wall -O3 -g -std=c++98 #-fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -O3 -g -std=c++98 -fsanitize=address
 # =============
 
 FILES = main $(NAME)
@@ -55,10 +55,12 @@ $(NAME)::
 -include $(DEP)
 
 clean:
-	$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR)
+	@echo "$(OBJ_DIR) and company leave 42 🗑"
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
+	@echo "$(NAME) has been black holed 🕳"
 
 re:
 	@$(MAKE) fclean $(NPD)

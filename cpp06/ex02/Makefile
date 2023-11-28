@@ -6,11 +6,11 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 07:41:15 by jsebasti          #+#    #+#              #
-#    Updated: 2023/11/21 12:34:45 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/11/21 13:35:38 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= Serializer
+NAME		= Identify
 NPD			= --no-print-directory
 OBJ_DIR		= obj/
 
@@ -26,7 +26,7 @@ CC = clang++
 CFLAGS = -Werror -Wextra -Wall -O3 -g -std=c++98 -fsanitize=address
 # =============
  
-FILES = main $(NAME)
+FILES = main $(NAME) Base
 
 SRC = $(addsuffix .cpp, $(FILES))
 

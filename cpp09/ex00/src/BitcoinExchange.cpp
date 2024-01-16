@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 18:16:35 by jsebasti          #+#    #+#             */
-/*   Updated: 2024/01/09 16:15:10 by jsebasti         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:29:35 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,5 +263,5 @@ void	BitcoinExchange::exchange( std::string file ) {
 	if (saveDatabase(db, info) == false)
 		return ;
 	if (checkFile(in, file, info) == false)
-		return ;;
+		return ;
 }

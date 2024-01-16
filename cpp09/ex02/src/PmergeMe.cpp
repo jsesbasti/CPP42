@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:36:37 by jsebasti          #+#    #+#             */
-/*   Updated: 2024/01/16 10:07:34 by jsebasti         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:25:14 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,15 @@ void	PmergeMe::parse( std::string *av, int ac, std::vector<int> &vectorOrder, st
 	}
 }
 
-void	PmergeMe::createPairs( std::vector<int> &vectorOrder ) {
-	
+void	PmergeMe::createPairs( std::vector<int> &vectorOrder, bool odd ) {
+	int len = vectorOrder.size();
+
+	if (odd == true)
+		len -= 1;
+	for (int i = 0; i < len; i++)
+	{
+
+	}
 }
 
 void	PmergeMe::sortVector( std::vector<int> &vectorOrder ) {
@@ -91,6 +98,7 @@ void	PmergeMe::sortVector( std::vector<int> &vectorOrder ) {
 		odd = false;
 		last = vectorOrder[vectorOrder.size()];
 	}
+	std::unordered_set<int, int> pairs = createPairs(vectorOrder, odd);
 
 }
 

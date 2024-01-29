@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:36:37 by jsebasti          #+#    #+#             */
-/*   Updated: 2024/01/25 15:29:19 by jsebasti         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:32:54 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,111 +78,114 @@ void	PmergeMe::parse( std::string *av, int ac, std::vector<int> &vectorOrder, st
 	}
 }
 
-void	PmergeMe::orderPairs(std::vector<int> &tmp)
+void	PmergeMe::mergeVector( std::vector<int> &vectorOrder, int left, int mid, int right )
 {
-	int len = tmp.size();
-	int last = 0;
+	int n1 = mid - left + 1;
+	int n2 = right - mid;
 
-	for (int j = 2; j < len; j += 2)
-	{
-		if (last != j && tmp[last] > tmp[j])
-		{
-			int auxMin = tmp[j];
-			int auxMax = tmp[j + 1];
-			tmp[j] = tmp[last];
-			tmp[j + 1] = tmp[last + 1];
-			tmp[last] = auxMin;
-			tmp[last + 1] = auxMax;
-		}
-		last += j;
-	}
-}
-
-void	PmergeMe::createA(std::vector<int> &v, std::vector<int> &A)
-{
-	int len = v.size();
-	int pairs = len / 2;
+	std::vector<int> leftvectorM(n1);
+	std::vector<int> rightvectorM(n2);
+	for (int i = 0; i < n1; i++)
+		leftvectorM[i] = vectorOrder[left + i];
+	for (int j = 0; j < n2; j++)
+		rightvectorM[j] = vectorOrder[mid + 1 + j];
 	int i = 0;
-
-	for (int j = 1; j < pairs; j++)
+	int j = 0;
+	int k = left;
+	while (i < n1 && j < n2)
 	{
-		A.push_back(v[i]);
-		i += 2;
+		if (leftvectorM[i] <= rightvectorM[j])
+			vectorOrder[k] = leftvectorM[i++];
+		else 
+			vectorOrder[k] = rightvectorM[j++];
+		k++;
 	}
-	len = A.size();
-	v.erase(v.begin());
-	while ((int)v.size() > len + 1)
-		v.erase(v.begin() + 1);
+	while (i < n1)
+		vectorOrder[k++] = leftvectorM[i++];
+	while (j < n2)
+		vectorOrder[k] = rightvectorM[j++];
 }
 
-void	PmergeMe::checkOrderInPairs(std::vector<int> &tmp)
+void	PmergeMe::sortVector( std::vector<int> &vectorOrder, int left, int right ) {
+	if (left < right)
+	{
+		if (right - left < INSERTAUX)
+		{
+			for (int i = left + 1; i <= right; i++)
+			{
+				int key = vectorOrder[i];
+				int j = i - 1;
+				while (j >= left && vectorOrder[j] > key)
+				{
+					vectorOrder[j + 1] = vectorOrder[j];
+					j--;
+				}
+				vectorOrder[j + 1] = key;
+			}
+		}
+		else
+		{
+			int mid = left + (right - left) / 2;
+			sortVector(vectorOrder, left, mid);
+			sortVector(vectorOrder, mid + 1, right);
+			mergeVector(vectorOrder, left, mid, right);
+		}
+	}
+}
+
+void	PmergeMe::mergeDeque( std::deque<int> &dequeOrder, int left, int mid, int right )
 {
-	int len = tmp.size();
-	int pair = len / 2;
+	int n1 = mid - left + 1;
+	int n2 = right - mid;
+
+	std::deque<int> leftDequeM(n1);
+	std::deque<int> rightDequeM(n2);
+	for (int i = 0; i < n1; i++)
+		leftDequeM[i] = dequeOrder[left + i];
+	for (int j = 0; j < n2; j++)
+		rightDequeM[j] = dequeOrder[mid + 1 + j];
 	int i = 0;
-
-	for (int j = 1; j < pair; j++)
-		i += 2;
-	if (tmp[i] > tmp[i + 1])
+	int j = 0;
+	int k = left;
+	while (i < n1 && j < n2)
 	{
-		int aux = tmp[i];
-		tmp[i] = tmp[i + 1];
-		tmp[i + 1] = aux;
+		if (leftDequeM[i] <= rightDequeM[j])
+			dequeOrder[k] = leftDequeM[i++];
+		else 
+			dequeOrder[k] = rightDequeM[j++];
+		k++;
 	}
+	while (i < n1)
+		dequeOrder[k++] = leftDequeM[i++];
+	while (j < n2)
+		dequeOrder[k] = rightDequeM[j++];
 }
 
-std::vector<int>	PmergeMe::createPairs( std::vector<int> &vectorOrder ) {
-	int len = vectorOrder.size();
-	int	pairs = len / 2;
-	std::vector<int> tmp;
-
-	for (int i = 0; i < pairs; i++)
+void	PmergeMe::sortDeque( std::deque<int> &dequeOrder, int left, int right ) {
+	if (left < right)
 	{
-		for (int j = 0; j < 2; j++)
+		if (right - left < INSERTAUX)
 		{
-			tmp.push_back(vectorOrder[j]);
+			for (int i = left + 1; i <= right; i++)
+			{
+				int key = dequeOrder[i];
+				int j = i - 1;
+				while (j >= left && dequeOrder[j] > key)
+				{
+					dequeOrder[j + 1] = dequeOrder[j];
+					j--;
+				}
+				dequeOrder[j + 1] = key;
+			}
 		}
-		for (int j = 0; j < 2; j++)
-			vectorOrder.erase(vectorOrder.begin());
-		checkOrderInPairs(tmp);
-	}
-	return (tmp);
-}
-
-void	pushSInA(std::vector<int> &A, std::vector<int> &S)
-{
-	int last, next;
-	for(int i = 0; i < (int)S.size(); i++)
-	{
-		for (j = 0; j < (int)A.size(); j++)
+		else
 		{
-
+			int mid = left + (right - left) / 2;
+			sortDeque(dequeOrder, left, mid);
+			sortDeque(dequeOrder, mid + 1, right);
+			mergeDeque(dequeOrder, left, mid, right);
 		}
 	}
-}
-
-void	PmergeMe::sortVector( std::vector<int> &vectorOrder ) {
-	bool	odd = vectorOrder.size() % 2 != 0;
-	int	straggler;
-	std::vector<int> A;
-	std::vector<int> S;
-
-	if (odd == true)
-	{
-		straggler = vectorOrder[vectorOrder.size() - 1];
-		vectorOrder.pop_back();
-	}
-	std::vector<int> split_vector = createPairs(vectorOrder);
-	for (int i = 0; i < (int)split_vector.size(); i++)
-	{
-		vectorOrder.push_back(split_vector[i]);
-	}
-	orderPairs(vectorOrder);
-	createA(vectorOrder, A);
-	S = vectorOrder;
-	if (odd == true)
-		S.push_back(straggler);
-	pushSInA(A, S);
 }
 
 void	PmergeMe::order( std::string *av, int ac ) {
@@ -203,16 +206,16 @@ void	PmergeMe::order( std::string *av, int ac ) {
 		std::cout << " " << vectorOrder[i];
 	std::cout << std::endl;
 	clock_t	startTimeVector = clock();
-	sortVector( vectorOrder);
+	sortVector(vectorOrder, 0, vectorOrder.size() - 1);
 	clock_t endTimeVector = clock();
-	clock_t startTimeDeque = clock();
-	// sortDeque( dequeOrder, 0, dequeOrder.size() - 1);
-	clock_t endTimeDeque = clock();
 	double totalTimeVector = static_cast<double>(endTimeVector - startTimeVector) / CLOCKS_PER_SEC * 1000000.0;
+	clock_t startTimeDeque = clock();
+	sortDeque(dequeOrder, 0, dequeOrder.size() - 1);
+	clock_t endTimeDeque = clock();
 	double totalTimeDeque = static_cast<double>(endTimeDeque - startTimeDeque) / CLOCKS_PER_SEC * 1000000.0;
 	std::cout << "After:";
-	for (int i = 0; i < (int)vectorOrder.size(); i++)
-		std::cout << " " << vectorOrder[i];
+	for (int i = 0; i < (int)dequeOrder.size(); i++)
+		std::cout << " " << dequeOrder[i];
 	std::cout << std::endl;
 	std::cout << std::fixed;
 

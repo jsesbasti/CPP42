@@ -64,11 +64,11 @@ void	PmergeMe::parse( std::string *av, int ac, std::vector<int> &vectorOrder, st
 		for (int i = 0; i < ac; i++)
 		{
 			stringNumber(av[i]);
-			double check = std::stod(av[i]);
+			double check = stringToDouble(av[i]);
 			if (check > INT_MAX)
 				throw std::invalid_argument("Please introduce numbers smaller than the INT_MAX");
-			vectorOrder.push_back(std::stoi(av[i]));
-			dequeOrder.push_back(std::stoi(av[i]));
+			vectorOrder.push_back(stringToInt(av[i]));
+			dequeOrder.push_back(stringToInt(av[i]));
 		}
 		repeatedNumbers(vectorOrder);
 	}
@@ -221,4 +221,21 @@ void	PmergeMe::order( std::string *av, int ac ) {
 
 	std::cout << "Time to process a range of " << vectorOrder.size() << " elements with std::vector<int> : " << totalTimeVector << " us" << std::endl;
 	std::cout << "Time to process a range of " << dequeOrder.size() << " elements with std::deque<int> : " << totalTimeDeque << " us" <<  std::endl;
+}
+
+int stringToInt(const std::string& str) {
+    const char* cStr = str.c_str();
+    char* endptr;
+    int result = std::strtol(cStr, &endptr, 10);
+    if (*endptr != '\0' && !std::isspace(*endptr)) {
+        result = 0;
+    }
+    return result;
+}
+
+double stringToDouble(const std::string& str) {
+    std::istringstream iss(str);
+    double result;
+    iss >> result;
+    return result;
 }

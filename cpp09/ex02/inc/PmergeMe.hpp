@@ -13,13 +13,15 @@
 #ifndef __PMERGEME_HPP__
 # define __PMERGEME_HPP__
 
-# include <iomanip>
-# include <string>
 # include <iostream>
+# include <sstream>
+# include <algorithm>
+# include <string>
+# include <iomanip>
 # include <vector>
 # include <deque>
+# include <climits>
 # include <ctime>
-# include <chrono>
 
 # define INSERTAUX 3000
 
@@ -45,5 +47,8 @@ private:
 public:
 	static void				order( std::string *av, int ac );
 };
+
+int		stringToInt(const std::string& str);
+double	stringToDouble(const std::string& str);
 
 #endif

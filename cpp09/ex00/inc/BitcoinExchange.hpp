@@ -17,11 +17,12 @@
 # define DATA_FORMAT "date,exchange_rate"
 # define FILE_FORMAT "date | value"
 
-# include <iomanip>
 # include <iostream>
 # include <string>
+# include <iomanip>
 # include <fstream>
 # include <sstream>
+# include <algorithm>
 # include <map>
 
 # define IN_MAX_VALUE 1000.0f
@@ -42,7 +43,7 @@ private:
 	static void	checkValue( std::string value );
 
 	static bool	saveDatabase( std::ifstream &db, std::map<std::string, float> &info );
-	static bool	checkFile( std::ifstream &in, std::string file, std::map<std::string, float> &info );
+	static bool	checkFile( std::ifstream &in, const char *file, std::map<std::string, float> &info );
 
 	static void	checkDate( std::string date );
 	static void	checkYear( const std::string date );
@@ -50,8 +51,11 @@ private:
 	static void	checkDay( const std::string date );
 
 public:
-	static void	exchange( std::string file );
+	static void	exchange( const char *file );
 	
 };
+
+int		stringToInt(const std::string& str);
+float	stringToFloat(const std::string& str);
 
 #endif

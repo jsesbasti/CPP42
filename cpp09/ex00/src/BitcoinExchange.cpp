@@ -82,7 +82,7 @@ bool	BitcoinExchange::saveDatabase( std::ifstream &db, std::map<std::string, flo
 		{
 			try
 			{
-				float fvalue = std::stof(value);
+				float fvalue = stringToFloat(value);
 				checkDate(date);
 				info[date] = fvalue;
 			}
@@ -109,7 +109,7 @@ void	BitcoinExchange::checkValue( std::string value ) {
 		if (!std::isdigit(value[i]) && value[i] != '.')
 			throw std::invalid_argument("value invalid number.");
 	}
-	float fvalue = std::stof(value);
+	float fvalue = stringToFloat(value);
 	
 	if (fvalue < 0)
 		throw std::out_of_range("Negative number");
@@ -138,7 +138,7 @@ void	BitcoinExchange::checkFormatIN( std::ifstream &in, std::map<std::string, fl
 				try
 				{
 					checkValue(value);
-					fvalue = std::stof(value);
+					fvalue = stringToFloat(value);
 					checkDate(date);
 				}
 				catch (const std::exception &e)
@@ -159,7 +159,7 @@ void	BitcoinExchange::checkFormatIN( std::ifstream &in, std::map<std::string, fl
 	}
 }
 
-bool	BitcoinExchange::checkFile( std::ifstream &in, std::string file, std::map<std::string, float> &info )
+bool	BitcoinExchange::checkFile( std::ifstream &in, const char *file, std::map<std::string, float> &info )
 {
 	in.open( file );
 	try
@@ -186,28 +186,28 @@ bool	BitcoinExchange::checkFile( std::ifstream &in, std::string file, std::map<s
 void	BitcoinExchange::checkYear( const std::string date )
 {
 	std::string stringYear = date.substr(0, 4);
-	int	year = std::stoi(stringYear);
+	int	year = stringToInt(stringYear);
 	if (year < 2009 || year > 2023)
 		throw std::out_of_range(" year is out of range");
 }
 
 void	BitcoinExchange::checkMonth( const std::string date )
 {
-	std::string stringMonth = date.substr(5, 7);
-	int month = std::stoi(stringMonth);
+	std::string stringMonth = date.substr(5, 2);
+	int month = stringToInt(stringMonth);
 	if (month < 1 || month > 12)
 		throw std::out_of_range(" month is out of range");
 }
 
 void	BitcoinExchange::checkDay( const std::string date )
 {
-	std::string stringMonth = date.substr(5, 7);
-	int month = std::stoi(stringMonth);
+	std::string stringMonth = date.substr(5, 2);
+	int month = stringToInt(stringMonth);
 	bool thirtyOne = false;
 	bool february = false;
 
-	std::string stringDay = date.substr(8, 10);
-	int day = std::stoi(stringDay);
+	std::string stringDay = date.substr(8, 2);
+	int day = stringToInt(stringDay);
 
 	if (month == 2)
 		february = true;
@@ -255,7 +255,7 @@ void	BitcoinExchange::checkDate( const std::string date ) {
 	Main function of exchange where you recive the input file
 */
 
-void	BitcoinExchange::exchange( std::string file ) {
+void	BitcoinExchange::exchange( const char *file ) {
 	std::map<std::string, float>	info;
 	std::ifstream					in;
 	std::ifstream					db;
@@ -264,4 +264,21 @@ void	BitcoinExchange::exchange( std::string file ) {
 		return ;
 	if (checkFile(in, file, info) == false)
 		return ;
+}
+
+int stringToInt(const std::string& str) {
+    const char* cStr = str.c_str();
+    char* endptr;
+    int result = std::strtol(cStr, &endptr, 10);
+    if (*endptr != '\0' && !std::isspace(*endptr)) {
+        result = 0;
+    }
+    return result;
+}
+
+float stringToFloat(const std::string& str) {
+    std::istringstream iss(str);
+    float result;
+    iss >> result;
+    return result;
 }

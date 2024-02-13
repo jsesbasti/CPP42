@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:29:42 by jsebasti          #+#    #+#             */
-/*   Updated: 2024/01/29 17:29:16 by jsebasti         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:55:33 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ private:
 	static void				stringNumber( std::string num );
 	static void				repeatedNumbers( std::vector<int> &vectorOrder );
 	static void 			parse( std::string *av, int ac, std::vector<int> &vectorOrder, std::deque<int> &dequeOrder);
+	static void				printTime( int range, std::string container, double timeDiff );
 
 public:
 	static void				order( std::string *av, int ac );

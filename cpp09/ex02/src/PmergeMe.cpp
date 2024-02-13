@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:36:37 by jsebasti          #+#    #+#             */
-/*   Updated: 2024/01/29 17:32:54 by jsebasti         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:59:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,8 @@ void	PmergeMe::sortDeque( std::deque<int> &dequeOrder, int left, int right ) {
 void	PmergeMe::order( std::string *av, int ac ) {
 	std::vector<int>	vectorOrder;
 	std::deque<int>		dequeOrder;
+	std::clock_t		vecTime[2];
+	std::clock_t		dqueTime[2];
 
 	try
 	{
@@ -205,22 +207,20 @@ void	PmergeMe::order( std::string *av, int ac ) {
 	for (int i = 0; i < ac; i++)
 		std::cout << " " << vectorOrder[i];
 	std::cout << std::endl;
-	clock_t	startTimeVector = clock();
-	sortVector(vectorOrder, 0, vectorOrder.size() - 1);
-	clock_t endTimeVector = clock();
-	double totalTimeVector = static_cast<double>(endTimeVector - startTimeVector) / CLOCKS_PER_SEC * 1000000.0;
-	clock_t startTimeDeque = clock();
-	sortDeque(dequeOrder, 0, dequeOrder.size() - 1);
-	clock_t endTimeDeque = clock();
-	double totalTimeDeque = static_cast<double>(endTimeDeque - startTimeDeque) / CLOCKS_PER_SEC * 1000000.0;
+	vecTime[ 0 ] = std::clock();
+	sortVector( vectorOrder, 0, vectorOrder.size() - 1 );
+	vecTime[ 1 ] = std::clock();
+	dqueTime[ 0 ] = std::clock();
+	sortDeque( dequeOrder, 0, dequeOrder.size() - 1 );
+	dqueTime[ 1 ] = std::clock();
 	std::cout << "After:";
 	for (int i = 0; i < (int)dequeOrder.size(); i++)
 		std::cout << " " << dequeOrder[i];
 	std::cout << std::endl;
 	std::cout << std::fixed;
 
-	std::cout << "Time to process a range of " << vectorOrder.size() << " elements with std::vector<int> : " << totalTimeVector << " us" << std::endl;
-	std::cout << "Time to process a range of " << dequeOrder.size() << " elements with std::deque<int> : " << totalTimeDeque << " us" <<  std::endl;
+	printTime( vectorOrder.size(), "vector", ( static_cast< double >( vecTime[ 1 ] - vecTime[ 0 ] ) * 1000 ) / CLOCKS_PER_SEC );
+	printTime( dequeOrder.size(), "deque", ( static_cast< double >( dqueTime[ 1 ] - dqueTime[ 0 ] ) * 1000 ) / CLOCKS_PER_SEC );
 }
 
 int stringToInt(const std::string& str) {
@@ -238,4 +238,12 @@ double stringToDouble(const std::string& str) {
     double result;
     iss >> result;
     return result;
+}
+
+void	PmergeMe::printTime( int range, std::string container, double timeDiff )
+{
+	std::cout << std::fixed;
+	std::cout << "Time to process a range of " << range;
+	std::cout << " elements with std::" << container;
+	std::cout << " : " << timeDiff << " us" << std::endl;
 }

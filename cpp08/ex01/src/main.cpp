@@ -137,10 +137,10 @@ void	testFindSpan( void )
 	{
 		std::cout << e.what() << std::endl;
 	}
-	sp.addNumber( 1 );
+	sp.addNumber( INT_MAX );
 	sp.addNumber( 12 );
 	sp.addNumber( 7 );
-	sp.addNumber( 9 );
+	sp.addNumber( INT_MIN );
 	std::cout << "sp -> " << sp << std::endl;
 	std::cout << "Shortest span is: " << sp.shortestSpan() << std::endl;
 	std::cout << "Longest span is: " << sp.longestSpan() << std::endl;

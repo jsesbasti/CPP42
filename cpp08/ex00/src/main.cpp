@@ -18,16 +18,16 @@ int main()
 {
 	std::vector<int> vector;
 	for (int j = 0; j < 5; j++)
-		    vector.push_back(j + 1);
+		vector.push_back(j + 1);
 	int i = 0;
 	try
 	{
-		i = easyfind(vector, 10);
+		i = easyfind(vector, 2);
 		std::cout << i << std::endl;
 	}
 	catch (std::out_of_range &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
-
+	return (0);
 }

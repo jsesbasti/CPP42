@@ -47,7 +47,7 @@ void	Span::addNumber( int _N ) {
 
 int	Span::getNumber( unsigned int pos ) const
 {
-	std::multiset< int >::const_iterator it = this->vec.cbegin();
+	std::multiset< int >::const_iterator it = this->vec.begin();
 
 	if ( pos >= this->vec.size() )
 		throw std::out_of_range( "Invalid index" );
@@ -74,9 +74,9 @@ long	Span::shortestSpan( void ) {
 
 	if (this->getArgs() < 2)
 		throw std::logic_error("Can't find shortest span with less than 2 numbers");
-	for (std::multiset< int >::const_iterator it = this->vec.cbegin(); it != this->vec.cend(); it++)
+	for (std::multiset< int >::const_iterator it = this->vec.begin(); it != this->vec.end(); it++)
 	{
-		if (it != this->vec.cbegin() && std::abs( *it - last ) < minSpan)
+		if (it != this->vec.begin() && std::abs( *it - last ) < minSpan)
 			minSpan = std::abs(*it - last);
 		last = *it;
 	}

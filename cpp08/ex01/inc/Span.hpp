@@ -14,6 +14,9 @@
 # define __SPAN_HPP__
 
 # include <iostream>
+# include <algorithm>
+# include <ctime>
+# include <limits>
 # include <set>
 
 class Span

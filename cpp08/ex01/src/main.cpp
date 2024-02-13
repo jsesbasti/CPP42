@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include <iostream>
+#include <climits>
 #include "Span.hpp"
-#include <array>
+#include <vector>
 
 void	testCopy( void )
 {
@@ -56,17 +57,20 @@ void	testAddNumberTwo( void )
 {
 	Span					sp( 10 );
 	Span					sp2( 9 );
-	std::array< int, 10 >	arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	std::vector< int >	arr;
 
-	std::cout << "Adding: std::array< int, 10 >	arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }" << std::endl;
+	for (int i = 0; i < 10; i++)
+		arr.push_back(i);
+
+	std::cout << "Adding: std::vector< int >	arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }" << std::endl;
 	std::cout << "sp -> " << sp << std::endl;
-	sp.addNumber< std::array< int, 10 > >( arr.begin(), arr.end() );
+	sp.addNumber< std::vector< int > >( arr.begin(), arr.end() );
 	std::cout << "sp -> " << sp << std::endl;
-	std::cout << "Adding: std::array< int, 10 >	arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }" << std::endl;
+	std::cout << "Adding: std::vector< int >	arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }" << std::endl;
 	std::cout << "sp2 -> " << sp2 << std::endl;
 	try
 	{
-		sp.addNumber< std::array< int, 10 > >( arr.begin(), arr.end() );
+		sp.addNumber< std::vector< int > >( arr.begin(), arr.end() );
 	}
 	catch (const std::exception& e)
 	{

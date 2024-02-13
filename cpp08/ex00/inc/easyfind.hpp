@@ -17,7 +17,7 @@
 # include <exception>
 
 template <typename T>
-int	easyfind(T &container, int num);
+int	easyfind(const T &container, const int num);
 
 # include "easyfind.tpp"
 

@@ -14,8 +14,12 @@
 
 template <typename T>
 int	easyfind(const T &container, const int num) {
-	for (typename T::iterator it = container.begin(); it != container.end(); it++)
+	typename T::const_iterator it = container.begin();
+	while (it != container.end())
+	{
+		++it;
 		if (*it == num)
-			return (num);
-	throw std::out_of_range("The number is not in the container");
+			return (*it);
+	}
+	throw std::out_of_range("Can't find the number in the container");
 }
